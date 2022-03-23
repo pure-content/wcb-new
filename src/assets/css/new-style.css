@@ -1,0 +1,475 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+.row {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 100%;
+}
+
+header {
+  padding: 17px 0px;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-holder {
+  display: flex;
+}
+
+.header-holder .burger {
+  display: none;
+  position: relative;
+  width: 38px;
+}
+.header-holder .burger div {
+  background: #92c3df;
+  border-radius: 10px;
+  height: 4px;
+  margin: 7px 0;
+}
+
+.header-holder .burger div:nth-of-type(1) {
+  width: 100%;
+}
+
+.header-holder .burger div:nth-of-type(2) {
+  width: 75%;
+}
+
+.header-holder .burger div:nth-of-type(3) {
+  width: 100%;
+}
+
+.header-holder .logo img {
+  width: 100%;
+  height: 100%;
+  max-width: 319px;
+  max-height: 53px;
+}
+
+.header-holder .menu-item-holder {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.header-holder .menu-item-holder ul {
+  display: flex;
+}
+
+.header-holder .menu-item-holder ul li {
+  list-style: none;
+}
+
+.header-holder .menu-item-holder ul li a {
+  font-family: "Archivo Narrow";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: right;
+  color: #334253;
+  text-decoration: none;
+  margin: 0px 15px;
+  text-transform: uppercase;
+}
+
+.search-language .search form {
+  position: relative;
+  margin-right: 15px;
+}
+
+.search-language .search form input:first-child {
+  font-family: "Archivo Narrow";
+
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgb(73 149 192 / 25%);
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid #92c3df;
+  width: 0px;
+  position: absolute;
+  transition: 0.3s;
+  right: 0px;
+  opacity: 0;
+}
+
+.row .search-language .search form .active-search {
+  opacity: 1;
+  width: 300px;
+  position: absolute;
+  top: -20px;
+}
+
+.search-language .search form .prefix {
+  background-color: transparent;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjM2MDQgMTQuMTg0NUwxNC4zOTc4IDExLjIyMTlDMTQuOTM2NCAxMC4xNDQ2IDE1LjI5NTUgOC44ODc3OCAxNS4yOTU1IDcuNjMwOTJDMTUuMjk1NSAzLjQxMTQ3IDExLjg4NDEgMCA3LjY2NDYyIDBDMy40NDUxNiAwIDAuMDMzNjkxNCAzLjQxMTQ3IDAuMDMzNjkxNCA3LjYzMDkyQzAuMDMzNjkxNCAxMS44NTA0IDMuNDQ1MTYgMTUuMjYxOCA3LjY2NDYyIDE1LjI2MThDOC45MjE0OCAxNS4yNjE4IDEwLjE3ODMgMTQuOTAyNyAxMS4yNTU2IDE0LjM2NDFMMTQuMjE4MiAxNy4zMjY3QzE1LjExNiAxOC4yMjQ0IDE2LjQ2MjYgMTguMjI0NCAxNy4zNjA0IDE3LjMyNjdDMTguMTY4NCAxNi40Mjg5IDE4LjE2ODQgMTUuMDgyMyAxNy4zNjA0IDE0LjE4NDVaTTcuNjY0NjIgMTMuNDY2M0M0LjQzMjcgMTMuNDY2MyAxLjgyOTIgMTAuODYyOCAxLjgyOTIgNy42MzA5MkMxLjgyOTIgNC4zOTkgNC40MzI3IDEuNzk1NTEgNy42NjQ2MiAxLjc5NTUxQzEwLjg5NjUgMS43OTU1MSAxMy41IDQuMzk5IDEzLjUgNy42MzA5MkMxMy41IDEwLjg2MjggMTAuODk2NSAxMy40NjYzIDcuNjY0NjIgMTMuNDY2M1oiIGZpbGw9IiMzMzQyNTMiLz4KPC9zdmc+Cg==);
+  background-repeat: no-repeat;
+  border: none;
+  color: #fff;
+  height: 20px;
+  padding: 0;
+  position: absolute;
+  right: 5px;
+  top: -10px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.header-holder .search-language {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 94px;
+}
+
+.search-language .language .active-language {
+  cursor: pointer;
+  display: flex;
+}
+
+.search-language .language .active-language img {
+  max-width: 26px;
+  max-width: 25px;
+  margin-left: 18px;
+}
+
+.search-language .language {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.search-language .language .dropdown {
+  display: none;
+  position: absolute;
+  bottom: -80px;
+  right: -10px;
+}
+
+.search-language .language .dropdown ul {
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(73, 149, 192, 0.25);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.search-language .language .dropdown ul li {
+  list-style: none;
+  cursor: pointer;
+}
+
+.search-language .language .dropdown ul li img {
+  margin-left: 0px;
+}
+
+.app-info {
+  padding: 50px 0px;
+  background: url("../images/bg-info-app.png"),
+    linear-gradient(to right, #eef1d6, #95ddae);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.app-info .row h3 {
+  font-family: "Chivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 33px;
+  line-height: 39px;
+  text-align: center;
+  color: #334253;
+}
+
+.app-info .row .info-holder {
+  display: flex;
+  margin-top: 67px;
+  justify-content: center;
+}
+
+.app-info .row .info-holder .text h3 {
+  font-family: "Chivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 31px;
+  color: #334253;
+  text-align: left;
+}
+
+.app-info .row .info-holder .text p {
+  font-family: "Chivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  color: #334253;
+  max-width: 576px;
+  margin-bottom: 30px;
+}
+
+.app-info .row .info-holder .image-and-link {
+  margin-left: 66px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.app-info .row .info-holder .image-and-link .link-app {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 32px;
+}
+
+.company-image {
+  padding: 33px 0px;
+}
+
+.company-image .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 960px;
+}
+
+footer {
+  background: #e5ecf0;
+  padding-top: 52px;
+}
+
+footer .link-holder {
+  display: flex;
+  flex-direction: column;
+}
+
+footer .link-holder .main-info {
+  display: flex;
+  flex-direction: column;
+  max-width: 265px;
+  margin-right: 88px;
+}
+
+footer .link-holder .main-info ul {
+  margin-top: 27px;
+}
+
+footer .link-holder .row .main-info ul li {
+  list-style: none;
+}
+
+footer .link-holder .row .main-info ul li a {
+  font-family: "Chivo";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 14px;
+  line-height: 40px;
+  color: #334253;
+  margin-top: 5px;
+  text-decoration: none;
+}
+
+footer .link-holder .main-info .social-link {
+  margin-top: 80px;
+  display: flex;
+  align-items: center;
+}
+
+footer .link-holder .main-info .social-link a {
+  margin: 0px 20px;
+}
+footer .link-holder .main-info .social-link a svg path {
+  transition: 0.3s;
+}
+footer .link-holder .main-info .social-link a svg:hover path {
+  fill: #34b760;
+}
+
+footer .link-holder .main-info .social-link a:first-child {
+  margin-left: 0px;
+}
+
+footer .link-holder .main-info .social-link a:last-child {
+  margin-right: 0px;
+}
+
+footer .link-holder .sub-info {
+  display: flex;
+  flex-direction: column;
+  max-width: 440px;
+  margin: 0px 25px;
+}
+
+footer .link-holder .sub-info:first-child {
+  margin-left: 0px;
+}
+
+footer .link-holder .sub-info:last-child {
+  margin-right: 0px;
+}
+
+footer .link-holder .sub-info h3 {
+  font-family: "Archivo Narrow";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #334253;
+  position: relative;
+  margin-top: 10px;
+}
+
+footer .link-holder .sub-info h3:before {
+  content: "";
+  width: 46px;
+  height: 2px;
+  background-color: #34b760;
+  left: 0px;
+  display: block;
+  bottom: -4px;
+  position: absolute;
+}
+
+footer .link-holder .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+footer .link-holder .sub-info ul li {
+  list-style: none;
+}
+footer .link-holder .sub-info ul li a {
+  font-family: "Chivo";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 40px;
+  color: #334253;
+  max-width: 208px;
+  text-decoration: none;
+}
+
+footer .link-holder .sub-info ul li:first-child {
+  margin-top: 42px;
+}
+
+footer .link-holder .email-info {
+  display: flex;
+  margin-top: 40px;
+  align-items: flex-end;
+  padding-bottom: 50px;
+  justify-content: flex-start;
+}
+
+footer .link-holder .email-info .email form {
+  display: flex;
+}
+
+footer .link-holder .email-info .email form .text {
+  background: #ffffff;
+  border: none;
+  padding: 5px 20px;
+  font-family: "Chivo";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 14px;
+  line-height: 40px;
+  display: flex;
+  align-items: center;
+  color: #334253;
+  max-height: 32px;
+  width: 226px;
+}
+
+footer .link-holder .email-info .email form .submit {
+  background: #34b760;
+  padding: 5px 7px;
+  border: none;
+  color: #ffffff;
+  width: 74px;
+  font-family: "Chivo";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+footer .link-holder .email-info .text-footer-info {
+  margin-left: 37px;
+}
+
+footer .link-holder .email-info .text-footer-info p {
+  font-family: "Chivo";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 12px;
+  line-height: 20px;
+  color: #000000;
+  max-width: 685px;
+}
+
+footer .greeen-footer {
+  background: #34b760;
+  padding: 13px 0px;
+}
+
+footer .greeen-footer .row {
+  display: flex;
+  justify-content: space-between;
+}
+
+footer .greeen-footer .row .copyright {
+  font-family: "Chivo";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 16px;
+  line-height: 30px;
+  color: #ffffff;
+}
+
+footer .greeen-footer .row .link {
+  font-family: "Chivo";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: right;
+  color: #ffffff;
+}
+
+footer .greeen-footer .row .link ul {
+  display: flex;
+}
+
+footer .greeen-footer .row .link ul li {
+  list-style: none;
+}
+
+footer .greeen-footer .row .link ul li a {
+  text-decoration: none;
+  font-family: "Chivo";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: right;
+  color: #ffffff;
+  border-right: 1px solid #fff;
+  max-height: 30px;
+  padding-right: 10px;
+  margin-left: 10px;
+}
+
+footer .greeen-footer .row .link ul li:last-child a {
+  border-right: none;
+}

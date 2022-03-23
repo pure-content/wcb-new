@@ -78,7 +78,7 @@ const shortid = require("shortid")
 //   }
 // }
 
-export default function OldFooter(props) {
+export default function Footer(props) {
   const footer = useStaticQuery(graphql`
     query {
       wpgraphql {

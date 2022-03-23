@@ -15,6 +15,10 @@ export default function HTML(props) {
           name="google-site-verification"
           content="vQJ30Y599YfJHjvzyFYu50MCacZIUazuqLmtY44aKBU"
         />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Caladea:ital,wght@0,400;0,700;1,400;1,700&family=Chivo:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap"
+          rel="stylesheet"
+        ></link>
         {props.headComponents}
       </head>
       <body {...props.bodyAttributes}>

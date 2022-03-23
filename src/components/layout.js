@@ -1,65 +1,70 @@
 import React, { useEffect } from "react"
 import $ from "jquery"
 import NewHeader from "./NewHeader"
-import OldHeader from "./OldHeader"
+// import OldHeader from "./OldHeader"
 import NewFooter from "./NewFooter"
-import OldFooter from "./OldFooter"
+import Footer from "./Footer"
 import Helmet from "react-helmet"
 
-import "../assets/css/foundation.min.css"
-import "../assets/css/normalize.css"
-import "../assets/style.css"
-import "../assets/css/all-styles.css"
+// import "../assets/css/foundation.min.css"
+// import "../assets/css/normalize.css"
+// import "../assets/style.css"
+// import "../assets/css/all-styles.css"
+// import "../assets/local-style.css"
+// import "../assets/css/media-screens.css"
+
 import "select2"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
-import "../assets/local-style.css"
-import "../assets/css/media-screens.css"
 import "../assets/css/plugins/font-awesome.min.css"
 import "../assets/css/plugins/jquery.fancybox.min.css"
 import "../assets/css/plugins/select2.min.css"
 import "../assets/css/plugins/slick.css"
 
-const Layout = props => {
+//New
+import "../assets/css/new-style.css"
+import "../assets/css/new-style-media-screens.css"
 
+const Layout = props => {
   const { children, pageInfo } = props
   const { isFrontPage, contentType, title, uri } = pageInfo ? pageInfo : ""
   const mainClass = isFrontPage ? "homePage" : ""
 
   useEffect(() => {
-    if (!document.querySelector('#omappapi')) {
-      let script = document.createElement('script');
-      script.setAttribute('data-campaign', 'z4rlnrgbdtn59cdhqhdf');
-      script.setAttribute('data-user', '71002');
-      script.setAttribute('async', true);
-      script.setAttribute('id', 'omappapi');
-      script.src = 'https://a.omappapi.com/app/js/api.min.js';
-      document.body.appendChild(script);
+    if (!document.querySelector("#omappapi")) {
+      let script = document.createElement("script")
+      script.setAttribute("data-campaign", "z4rlnrgbdtn59cdhqhdf")
+      script.setAttribute("data-user", "71002")
+      script.setAttribute("async", true)
+      script.setAttribute("id", "omappapi")
+      script.src = "https://a.omappapi.com/app/js/api.min.js"
+      document.body.appendChild(script)
 
-      
-      let mobScript = document.createElement('script');
-      mobScript.setAttribute('data-campaign', 'qrasoppinx7ifldrxr6o');
-      mobScript.setAttribute('data-user', '71002');
-      mobScript.setAttribute('async', true);
-      mobScript.setAttribute('id', 'omappapiMob');
-      mobScript.src = 'https://a.omappapi.com/app/js/api.min.js';
-      document.body.appendChild(mobScript);
+      let mobScript = document.createElement("script")
+      mobScript.setAttribute("data-campaign", "qrasoppinx7ifldrxr6o")
+      mobScript.setAttribute("data-user", "71002")
+      mobScript.setAttribute("async", true)
+      mobScript.setAttribute("id", "omappapiMob")
+      mobScript.src = "https://a.omappapi.com/app/js/api.min.js"
+      document.body.appendChild(mobScript)
     }
-    
-    $('a[href*="wp-content"]').on('click' ,function(e){
-      e.preventDefault();
-    });
-    $('a[href*="wp-content"]').each(function(i, elem){
-      $(elem).attr('href', '');
-    });
-    
 
+    $('a[href*="wp-content"]').on("click", function (e) {
+      e.preventDefault()
+    })
+    $('a[href*="wp-content"]').each(function (i, elem) {
+      $(elem).attr("href", "")
+    })
   })
 
-  const CurrentHeader = isFrontPage ? (<NewHeader title={title} />) : (<OldHeader title={title} uri={uri} />)
+  // const CurrentHeader = isFrontPage ? (
+  //   <NewHeader title={title} />
+  // ) : (
+  //   <OldHeader title={title} uri={uri} />
+  // )
   // const CurrentFooter = isFrontPage ? (<NewFooter />) : (<OldFooter contentType={contentType} />)
-  const CurrentFooter = <OldFooter contentType={contentType} />
-  
+  // const CurrentFooter = <Footer contentType={contentType} />
+
   return (
     <>
       <Helmet>
@@ -75,9 +80,9 @@ const Layout = props => {
         ></script>
       </Helmet>
 
-      {CurrentHeader}
+      <NewHeader title={title} />
       <main className={mainClass}>{children}</main>
-      {CurrentFooter}
+      <Footer contentType={contentType} />
     </>
   )
 }
