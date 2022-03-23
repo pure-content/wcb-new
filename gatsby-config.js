@@ -18,7 +18,7 @@ module.exports = {
       options: {
         typeName: "WPGraphQL",
         fieldName: "wpgraphql",
-        url: "https://meek-hint.flywheelsites.com/graphql",
+        url: "https://yappie.io/pure-content/wcb/graphql",
         batch: true,
       },
     },
