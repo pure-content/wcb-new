@@ -4,79 +4,8 @@ import "jquery-match-height"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import Parser from "html-react-parser"
 import Equalizer from "./Equalizer"
+import AppBanner from "./AppBanner"
 const shortid = require("shortid")
-
-// gfForm(formId: {eq: 1}) {
-//   formId
-//   slug
-//   apiURL
-//   descriptionPlacement
-//   formFields {
-//       id
-//       label
-//       labelPlacement
-//       description
-//       descriptionPlacement
-//       type
-//       choices
-//       content
-//       errorMessage
-//       inputMaskValue
-//       isRequired
-//       visibility
-//       cssClass
-//       placeholder
-//       size
-//       defaultValue
-//       maxLength
-//       conditionalLogic
-//       emailConfirmEnabled
-//   }
-//   button {
-//       text
-//   }
-//   confirmations {
-//       message
-//   }
-// }
-
-// allGfForm {
-//   edges {
-//     node {
-//       formId
-//       slug
-//       apiURL
-//       descriptionPlacement
-//       formFields {
-//         id
-//         label
-//         labelPlacement
-//         description
-//         descriptionPlacement
-//         type
-//         choices
-//         content
-//         errorMessage
-//         inputMaskValue
-//         isRequired
-//         visibility
-//         cssClass
-//         placeholder
-//         size
-//         defaultValue
-//         maxLength
-//         conditionalLogic
-//         emailConfirmEnabled
-//       }
-//       button {
-//           text
-//       }
-//       confirmations {
-//           message
-//       }
-//     }
-//   }
-// }
 
 export default function Footer(props) {
   const footer = useStaticQuery(graphql`
@@ -91,6 +20,11 @@ export default function Footer(props) {
             buttonsHeader
             appstoreButtonLink
             googlePlayButtonLink
+            trustSubsectionLogos {
+              trustSubsectionLogo {
+                mediaItemUrl
+              }
+            }
             partnersList {
               link
               logo {
@@ -326,308 +260,167 @@ export default function Footer(props) {
     url: item.url.replace(url, ""),
   }))
 
-  const TopFooterWrap = () => {
-    if (contentType !== "top_brokers") {
-      const foot_bg = footerOptions.topFooterBackground.mediaItemUrl
-      const foot_app_img = footerOptions.appsImage.mediaItemUrl
-      const store_img = footerOptions.appstoreButtonImage.mediaItemUrl
-      const market_img = footerOptions.googlePlayButtonImage.mediaItemUrl
-
+  const TrustSection = () => {
+    const { trustSubsectionLogos } = footerOptions
+    if (trustSubsectionLogos.length > 0) {
       return (
-        <div
-          className="top-footer-wrap"
-          style={{ backgroundImage: `url(${foot_bg})` }}
-        >
-          <div className="blue-overlay"></div>
-          <div className="row top-footer-cont">
-            <div className="large-7 columns top-left-footer">
-              <h3 className="btns-heading">{footerOptions.buttonsHeader}</h3>
-              <img
-                className="lazy left app-img"
-                src={foot_app_img}
-                data-src={foot_app_img}
-                alt="Application"
-              />
-              <a
-                className="footer-btn left"
-                href={footerOptions.appstoreButtonLink}
-              >
-                <img
-                  className="lazy footer-appstore"
-                  src={store_img}
-                  data-src={store_img}
-                  alt="AppStore"
-                />
-              </a>
-              <a
-                className="footer-btn left"
-                href={footerOptions.googlePlayButtonLink}
-              >
-                <img
-                  className="lazy footer-playmarket"
-                  src={market_img}
-                  data-src={market_img}
-                  alt="GooglePlay"
-                />
-              </a>
-            </div>
-            <div className="large-5 columns">
-              {Parser(footerOptions.newFooterSidebarContent)}
-            </div>
-          </div>
-        </div>
-      )
-    } else return null
-  }
-
-  const PartnersList = () => {
-    if (footerOptions.partnersList.length > 0) {
-      return (
-        <div className="footer-partners-wrap">
-          <div className="row">
-            <div className="small-12 columns">
-              <ul>
-                {footerOptions.partnersList.map(partner => (
-                  <li key={shortid.generate()}>
-                    {partner.link && (
-                      <a href={partner.link} target="_blank">
-                        <img src={partner.logo.mediaItemUrl} alt="Partner" />
-                      </a>
-                    )}
-                    {!partner.link && (
-                      <img src={partner.logo.mediaItemUrl} alt="Partner" />
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      )
-    } else return null
-  }
-
-  const LightGrey = () => {
-    const ColGenerator = (title, links, logo) => {
-      return (
-        <div className="large-3 medium-6 columns" data-mh="fooler-col">
-          {logo && (
-            <Link className="logo-link" to={"/"}>
-              <img className="lazy" src={logo.mediaItemUrl} alt="Footer logo" />
-            </Link>
-          )}
-          {title && <h3>{title}</h3>}
-          <ul>
-            {links.map(eachLink => {
-              const linkTitle = eachLink.title
-              const linkType = eachLink.linkType
-              const linkItself =
-                linkType === "text"
-                  ? eachLink.linkText.includes("wp-content")
-                    ? eachLink.linkText
-                    : eachLink.linkText.replace(url, "")
-                  : eachLink.link.uri
+        <div class="company-image">
+          <div class="row">
+            {trustSubsectionLogos.map(logo => {
               return (
-                <li key={shortid.generate()}>
-                  <Link to={linkItself}>{linkTitle}</Link>
-                </li>
+                <img
+                  key={shortid.generate()}
+                  className="lazy"
+                  src={logo.trustSubsectionLogo.mediaItemUrl}
+                />
               )
             })}
-          </ul>
+          </div>
         </div>
       )
+    } else {
+      return null
     }
-    const FirstCol = () => {
-      if (footerOptions.firstColLinks.length > 0) {
-        return ColGenerator(
-          footerOptions.firstColTitle,
-          footerOptions.firstColLinks
-        )
-      } else return null
-    }
-    const SecondCol = () => {
-      if (footerOptions.secColLinks.length > 0) {
-        return ColGenerator(
-          footerOptions.secColTitle,
-          footerOptions.secColLinks
-        )
-      } else return null
-    }
+  }
 
-    const ThirdCol = () => {
-      if (footerOptions.threeColLinks.length > 0) {
-        return ColGenerator(
-          footerOptions.threeColTitle,
-          footerOptions.threeColLinks
-        )
-      } else return null
-    }
-    const ForthCol = () => {
-      if (footerOptions.fourColLinks.length > 0) {
-        return ColGenerator(
-          footerOptions.fourColTitle,
-          footerOptions.fourColLinks,
-          footerOptions.footerLogo
-        )
-      } else return null
-    }
-
-    return (
-      <div className="light-grey-wrap">
-        <div className="row">
-          <Equalizer>
-            <FirstCol />
-            <SecondCol />
-            <ThirdCol />
-            <ForthCol />
-          </Equalizer>
-          {footerOptions.socialsList.length > 0 && (
-            <div className="large-6 medium-12 columns footer-half half-left">
-              <ul className="socials">
-                {footerOptions.socialsList.map(soc => {
+  return (
+    <>
+      <AppBanner />
+      <TrustSection />
+      <footer>
+        <div class="link-holder">
+          <div class="row">
+            <div class="main-info">
+              <img src={footerOptions.footerLogo.mediaItemUrl} alt="" />
+              <ul>
+                {footerOptions.fourColLinks.map(eachLink => {
+                  const linkTitle = eachLink.title
+                  const linkType = eachLink.linkType
+                  const linkItself =
+                    linkType === "text"
+                      ? eachLink.linkText.includes("wp-content")
+                        ? eachLink.linkText
+                        : eachLink.linkText.replace(url, "")
+                      : eachLink.link.uri
                   return (
                     <li key={shortid.generate()}>
-                      <Link to={soc.link} target="_blank">
-                        <img src={soc.icon.mediaItemUrl} alt={soc.icon.title} />
-                      </Link>
+                      <Link to={linkItself}>{linkTitle}</Link>
+                    </li>
+                  )
+                })}
+              </ul>
+              <div class="social-link">
+                {footerOptions.socialsList.map(soc => {
+                  return (
+                    <Link
+                      to={soc.link}
+                      target="_blank"
+                      key={shortid.generate()}
+                    >
+                      <img src={soc.icon.mediaItemUrl} alt={soc.icon.title} />
+                    </Link>
+                  )
+                })}
+              </div>
+            </div>
+            <div class="sub-info">
+              <h3>{footerOptions.firstColTitle}</h3>
+              <ul>
+                {footerOptions.firstColLinks.map(eachLink => {
+                  const linkTitle = eachLink.title
+                  const linkType = eachLink.linkType
+                  const linkItself =
+                    linkType === "text"
+                      ? eachLink.linkText.includes("wp-content")
+                        ? eachLink.linkText
+                        : eachLink.linkText.replace(url, "")
+                      : eachLink.link.uri
+                  return (
+                    <li key={shortid.generate()}>
+                      <Link to={linkItself}>{linkTitle}</Link>
                     </li>
                   )
                 })}
               </ul>
             </div>
-          )}
-
-          <div class="large-6 medium-12 columns footer-half half-right">
-            {/* <GravityFormForm
-              id={1}
-              formData={allGfForm}
-              lambda={process.env.LAMBDA_ENDPOINT}
-              successCallback={handleSuccess}
-              errorCallback={handleError}
-            /> */}
-
-            <div class="gf_browser_chrome gform_wrapper" id="gform_wrapper_1">
-              <div id="gf_1" class="gform_anchor" tabindex="-1"></div>
-              <form
-                method="post"
-                enctype="multipart/form-data"
-                target="gform_ajax_frame_1"
-                id="gform_1"
-                action="https://meek-hint.flywheelsites.com/#gf_1"
-              >
-                <div class="gform_body">
-                  <ul
-                    id="gform_fields_1"
-                    class="gform_fields top_label form_sublabel_below description_below"
-                  >
-                    <li
-                      id="field_1_1"
-                      class="gfield gfield_contains_required field_sublabel_below field_description_below hidden_label gfield_visibility_visible"
-                    >
-                      <label class="gfield_label" for="input_1_1">
-                        Email<span class="gfield_required">*</span>
-                      </label>
-                      <div class="ginput_container ginput_container_email">
-                        <input
-                          name="input_1"
-                          id="input_1_1"
-                          type="text"
-                          class="large"
-                          placeholder="Get Daily Email Alerts"
-                          aria-required="true"
-                          aria-invalid="false"
-                        />
-                      </div>
+            <div class="sub-info">
+              <h3>{footerOptions.secColTitle}</h3>
+              <ul>
+                {footerOptions.secColLinks.map(eachLink => {
+                  const linkTitle = eachLink.title
+                  const linkType = eachLink.linkType
+                  const linkItself =
+                    linkType === "text"
+                      ? eachLink.linkText.includes("wp-content")
+                        ? eachLink.linkText
+                        : eachLink.linkText.replace(url, "")
+                      : eachLink.link.uri
+                  return (
+                    <li key={shortid.generate()}>
+                      <Link to={linkItself}>{linkTitle}</Link>
                     </li>
-                  </ul>
-                </div>
-                <div class="gform_footer top_label">
-                  <input
-                    type="submit"
-                    id="gform_submit_button_1"
-                    class="gform_button button btn "
-                    value="Sign Up"
-                    onClick='if(window["gf_submitting_1"]){return false;}  window["gf_submitting_1"]=true;  '
-                    onKeyPress='if( event.keyCode == 13 ){ if(window["gf_submitting_1"]){return false;} window["gf_submitting_1"]=true;  jQuery("#gform_1").trigger("submit",[true]); }'
-                  />
-                  <input
-                    type="hidden"
-                    name="gform_ajax"
-                    value="form_id=1&amp;title=&amp;description=&amp;tabindex=0"
-                  />
-                  <input
-                    type="hidden"
-                    class="gform_hidden"
-                    name="is_submit_1"
-                    value="1"
-                  />
-                  <input
-                    type="hidden"
-                    class="gform_hidden"
-                    name="gform_submit"
-                    value="1"
-                  />
-                  <input
-                    type="hidden"
-                    class="gform_hidden"
-                    name="gform_unique_id"
-                    value=""
-                  />
-                  <input
-                    type="hidden"
-                    class="gform_hidden"
-                    name="state_1"
-                    value="WyJbXSIsImQ2ZDg2YWUyMTUzYzk5ODM3ZDBmNzE5Njc3NDAzMGI0Il0="
-                  />
-                  <input
-                    type="hidden"
-                    class="gform_hidden"
-                    name="gform_target_page_number_1"
-                    id="gform_target_page_number_1"
-                    value="0"
-                  />
-                  <input
-                    type="hidden"
-                    class="gform_hidden"
-                    name="gform_source_page_number_1"
-                    id="gform_source_page_number_1"
-                    value="1"
-                  />
-                  <input type="hidden" name="gform_field_values" value="" />
-                </div>
-              </form>
+                  )
+                })}
+              </ul>
+            </div>
+            <div class="sub-info">
+              <h3>{footerOptions.threeColTitle}</h3>
+              <ul>
+                {footerOptions.threeColLinks.map(eachLink => {
+                  const linkTitle = eachLink.title
+                  const linkType = eachLink.linkType
+                  const linkItself =
+                    linkType === "text"
+                      ? eachLink.linkText.includes("wp-content")
+                        ? eachLink.linkText
+                        : eachLink.linkText.replace(url, "")
+                      : eachLink.link.uri
+                  return (
+                    <li key={shortid.generate()}>
+                      <Link to={linkItself}>{linkTitle}</Link>
+                    </li>
+                  )
+                })}
+              </ul>
             </div>
           </div>
-
-          {footerOptions.footerText.length > 0 && (
-            <div className="small-12 columns footer-full">
-              <div className="text-wrap">
-                {Parser(footerOptions.footerText)}
-              </div>
+          <div class="row email-info">
+            <div class="email">
+              <form action="">
+                <input
+                  type="text"
+                  placeholder="Get Email Updates"
+                  class="text"
+                />
+                <input type="submit" class="submit" value="Sign Up" />
+              </form>
             </div>
-          )}
-        </div>
-      </div>
-    )
-  }
-  const DarkGrey = () => {
-    return (
-      <div className="dark-grey-wrap">
-        <div className="row">
-          {footerOptions.copyrightOptions.length > 0 && (
-            <div className="medium-6 columns">
+            <div class="text-footer-info">
               <p>
+                Nothing on this site constitutes advice or a recommendation –
+                you use the site and its contents at your own risk. Trade
+                wisely. Spread bets and CFDs are complex instruments and come
+                with a high risk of losing money rapidly due to leverage.
+                Between 74-89% of retail investor accounts lose money when
+                trading CFDs.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="greeen-footer">
+          <div class="row">
+            {footerOptions.copyrightOptions.length > 0 && (
+              <p class="copyright">
                 &copy;
                 {Parser(footerOptions.copyrightOptions)} {dt.getFullYear()}
               </p>
-            </div>
-          )}
-          <div className="medium-6 columns">
-            <div className="menu-footer-menu-container">
-              <ul id="menu-footer-menu" className="inline-list">
+            )}
+
+            <div class="link">
+              <ul>
                 {menuItems.map(menuItem => {
                   return (
-                    <li key={shortid.generate()} className="menu-item">
+                    <li key={shortid.generate()}>
                       <Link to={menuItem.url}>{menuItem.label}</Link>
                     </li>
                   )
@@ -636,16 +429,7 @@ export default function Footer(props) {
             </div>
           </div>
         </div>
-      </div>
-    )
-  }
-
-  return (
-    <footer>
-      <TopFooterWrap />
-      <PartnersList />
-      <LightGrey />
-      <DarkGrey />
-    </footer>
+      </footer>
+    </>
   )
 }
