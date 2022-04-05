@@ -1,3 +1,17 @@
+@media screen and (max-width: 1100px) {
+  .info-main-page .big-row .image {
+    max-width: 100%;
+    height: 440px;
+  }
+  .info-main-page .big-row {
+    flex-direction: column;
+  }
+
+  .best-online .row .best-broker-holder .broker {
+    max-width: 300px;
+  }
+}
+
 @media screen and (max-width: 1000px) {
   footer .link-holder .main-info {
     margin-right: 20px;
@@ -8,6 +22,10 @@
 }
 
 @media screen and (max-width: 970px) {
+  .best-online .row .best-broker-holder .broker {
+    max-width: 250px;
+  }
+
   footer .link-holder .email-info .email form {
     justify-content: center;
   }
@@ -54,9 +72,6 @@
   .header-holder .search-language {
     margin-left: 0px;
   }
-  /* .search-language .language {
-      display: none;
-  } */
   .header-holder {
     position: relative;
     justify-content: space-between;
@@ -174,11 +189,258 @@
     margin-left: 15px;
     margin-right: 15px;
     font-size: 18px;
-    max-width: 576px;
   }
 }
+@media screen and (max-width: 900px) {
+  .best-online .row .link-holder .item .text {
+    height: 42px;
+  }
+  .best-online .row .link-holder .item {
+    margin: 0px;
+    max-height: 145px;
+    box-shadow: none;
+    border: 1px solid #92c3df;
+    border-radius: 0px;
+  }
+  .information-block .row .image-adn-text img {
+    margin-bottom: 22px;
+  }
+  .information-block .row .image-adn-text {
+    flex-direction: column;
+    align-items: center;
+  }
+  .information-block .row .image-adn-text p {
+    margin-left: 0px;
+  }
+  .info-main-page .big-row .image {
+    max-width: 100%;
+    height: 340px;
+  }
+  .best-online .row .link-holder {
+    background-color: #fff;
+    padding: 7px;
+    max-width: 772px;
+    background: #ffffff;
+    box-shadow: 0px 4px 10px rgba(73, 149, 192, 0.25);
+    border-radius: 10px;
+  }
 
+  .best-online .row .link-holder a {
+    margin: 0px;
+  }
+
+  .best-online .row .link-holder a .item {
+    box-shadow: none;
+    border-radius: 0px;
+    justify-content: flex-start;
+  }
+
+  .best-online .row .link-holder a {
+    border: 1px solid #92c3df;
+  }
+
+  .best-online .row .link-holder a:nth-child(1),
+  .best-online .row .link-holder a:nth-child(2),
+  .best-online .row .link-holder a:nth-child(3),
+  .best-online .row .link-holder a:nth-child(4) {
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .best-online .row .link-holder a:nth-child(5),
+  .best-online .row .link-holder a:nth-child(6),
+  .best-online .row .link-holder a:nth-child(7),
+  .best-online .row .link-holder a:nth-child(8) {
+    border-bottom: none;
+    border-right: none;
+  }
+
+  .best-online .row .link-holder a:nth-child(1),
+  .best-online .row .link-holder a:nth-child(5) {
+    border-left: none;
+  }
+
+  .best-online .row .link-holder a:nth-child(4),
+  .best-online .row .link-holder a:nth-child(8) {
+    border-right: none;
+  }
+}
+@media screen and (max-width: 850px) {
+  .reviews .row .reviews-holder .item p {
+    max-width: 100%;
+  }
+  .reviews .row .reviews-holder .item:nth-child(2),
+  .reviews .row .reviews-holder .item:nth-child(3) {
+    max-width: 100%;
+  }
+  .reviews .row .reviews-holder {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 800px) {
+  .info-main-page .big-row .text p {
+    font-family: "Chivo";
+    font-style: normal;
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 35px;
+    /* or 194% */
+
+    color: #000000;
+  }
+  .best-online .row .company-broker p {
+    font-family: "Chivo";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 40px;
+    text-align: center;
+    color: #334253;
+    margin: auto;
+  }
+  .best-online .row .company-broker {
+    margin-top: 40px;
+  }
+  .best-online .row .best-broker-holder .broker:last-child {
+    margin-bottom: 0px;
+  }
+  .best-online {
+    background: linear-gradient(
+      180.87deg,
+      #e5ecf0 0.74%,
+      rgba(255, 255, 255, 0) 25.25%
+    );
+  }
+  .best-online .row .best-broker-holder .broker {
+    max-width: 560px;
+  }
+  .best-online .row .best-broker-holder {
+    flex-direction: column;
+    align-items: center;
+  }
+  .best-online .row .best-broker-holder .broker {
+    margin-bottom: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .best-online .row .company-broker h2 {
+    max-width: 567px;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  .information-block .row .author-info::after {
+    position: absolute;
+    content: "";
+    width: 100vw;
+    height: 103%;
+    background-color: #e5ecf0;
+    z-index: -1;
+    left: -33px;
+  }
+  .best-online .row .link-holder .item {
+    padding: 14px 12px;
+  }
+}
 @media screen and (max-width: 640px) {
+  .information-block .row .alignleft {
+    margin: auto;
+    margin-bottom: 22px;
+    display: block;
+    float: none;
+  }
+  .information-block .row .alignright {
+    margin: auto;
+    margin-bottom: 22px;
+    display: block;
+    float: none;
+  }
+  .information-block .row {
+    padding: 0px 29px 0px 33px;
+  }
+  .app-info .row .info-holder .text h3 {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .app-info .row .info-holder .text p {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .app-info .row {
+    padding: 0px 31px 0px 33px;
+  }
+  footer .link-holder .main-info .social-link a {
+    margin: 0px 33px;
+  }
+  .information-block .row .author-info p {
+    font-family: "Chivo";
+    font-style: normal;
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 25px;
+    text-align: center;
+    color: #424242;
+  }
+  .information-block .row p {
+    margin: auto;
+    margin-bottom: 10px;
+    font-family: "Chivo";
+    font-style: normal;
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 36px;
+
+    color: #000000;
+  }
+
+  .reviews .row .reviews-holder .item {
+    max-width: 511px;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  .reviews .row .reviews-holder .item:nth-child(2),
+  .reviews .row .reviews-holder .item:nth-child(3) {
+    max-width: 511px;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  .best-online .row {
+    padding: 0px 19px;
+  }
+  .best-online .row .more-info {
+    font-family: "Chivo";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 35px;
+    text-align: center;
+    color: #334253;
+    margin: auto;
+    margin-top: 20px;
+  }
+  .information-block .row img {
+    float: none;
+    display: block;
+    margin: auto;
+  }
+  .info-main-page .big-row .text h2 {
+    margin-bottom: 20px;
+  }
+
+  .info-main-page .big-row .text {
+    padding: 20px 26px 19px 34px;
+  }
+
+  .best-online .row .company-holder .item img {
+    max-height: 85px;
+    max-width: 159px;
+  }
+
+  .best-online .row .company-holder .item {
+    width: 177px;
+    padding: 0px 8px;
+  }
+
   footer .link-holder .email-info .email form .submit {
     max-width: 131px;
     width: 100%;
@@ -190,7 +452,9 @@
     color: #ffffff;
     display: flex;
     justify-content: center;
+    cursor: pointer;
   }
+
   footer .link-holder .email-info .email form {
     width: 530px;
   }
@@ -216,6 +480,10 @@
     margin-top: 75px;
     justify-content: center;
   }
+  footer .link-holder .main-info .social-link svg {
+    width: 47px;
+    height: 47px;
+  }
   footer .link-holder .row .main-info ul li a {
     font-family: "Chivo";
     font-style: normal;
@@ -238,9 +506,68 @@
   }
 }
 
+@media screen and (max-width: 640px) {
+  .best-online .row .link-holder a .item {
+    padding: 14px 13px;
+    justify-content: center;
+  }
+  .best-online .row h1 {
+    font-family: "Caladea";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 46px;
+    text-align: center;
+    color: #334253;
+    margin-bottom: 20px;
+  }
+  .best-online .row h2 {
+    font-family: "Chivo";
+    font-style: normal;
+    font-weight: 200;
+    font-size: 26px;
+    line-height: 31px;
+    text-align: center;
+    color: #334253;
+    max-width: 591px;
+    margin: auto;
+    margin-bottom: 30px;
+  }
+  .best-online .row h3 {
+    font-family: "Chivo";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 31px;
+    text-align: center;
+    color: #334253;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .best-online .row .link-holder a .item .icon {
+    max-width: 47px;
+    max-height: 47px;
+    margin-bottom: 10px;
+  }
+}
+
 @media screen and (max-width: 600px) {
+  .best-online .row .link-holder a:nth-child(7) {
+    border-left: none;
+  }
+  .best-online .row .link-holder a:nth-child(3) {
+    border-left: none;
+  }
+  .best-online .row .link-holder a:nth-child(1),
+  .best-online .row .link-holder a:nth-child(2) {
+    border-bottom: 1px solid #92c3df;
+  }
   .app-info .row .info-holder .image-and-link img {
     width: 100%;
+  }
+  .best-online .row .link-holder {
+    max-width: 300px;
   }
 }
 @media screen and (max-width: 570px) {

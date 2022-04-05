@@ -8,6 +8,9 @@ import Parser from "html-react-parser"
 import Equalizer from "../components/Equalizer"
 import Helmet from "react-helmet"
 import { avarageRatingCounter } from "../functions/avarageRatingCounter"
+import achivImg from "../assets/images/archiv.svg"
+import starImg from "../assets/images/star.svg"
+import AppBanner from "../components/AppBanner"
 const shortid = require("shortid")
 
 export const query = graphql`
@@ -32,12 +35,33 @@ export const query = graphql`
           homeBannerColor
           newBannerText
           trustSubsectionText
+          toughestBrokersHeading
+          toughestBrokersText
+          toughestBrokers {
+            brokerImage {
+              mediaItemUrl
+            }
+            brokerLink {
+              url
+            }
+            brokerName
+          }
+          companyHolder {
+            company {
+              mediaItemUrl
+            }
+          }
+          textIlustration {
+            mediaItemUrl
+          }
+          testimonialsText
           bottomTextDropdown
           etfBrokerInfoBox
           forexBrokerInfoBox
           stockBrokerInfoBox
           headingSocProof
           listSocProof {
+            author
             text
           }
           iconsListDropdown {
@@ -84,7 +108,7 @@ export const query = graphql`
               }
               featuredImage {
                 node {
-                  sourceUrl
+                  mediaItemUrl
                 }
               }
               uri
@@ -106,7 +130,7 @@ export const query = graphql`
               }
               featuredImage {
                 node {
-                  sourceUrl
+                  mediaItemUrl
                 }
               }
               uri
@@ -128,7 +152,7 @@ export const query = graphql`
               }
               featuredImage {
                 node {
-                  sourceUrl
+                  mediaItemUrl
                 }
               }
               uri
@@ -1215,7 +1239,239 @@ export default function NewHomePage({ data }) {
             generalSettings.bottomAdSecondBannerSectionForMobile?.bannerScript
           )}
       </Helmet>
-      <div className="new-hp-wrap">
+      <div class="best-online">
+        <div class="row">
+          {Parser(templateFields.newBannerText || "")}
+
+          <h3>{templateFields.toughestBrokersHeading}</h3>
+          <div class="link-holder">
+            {templateFields.toughestBrokers.map(brok => (
+              <Link
+                class="item"
+                to={brok.brokerLink.url}
+                key={shortid.generate()}
+              >
+                <img
+                  src={brok.brokerImage.mediaItemUrl}
+                  alt={brok.brokerName}
+                />
+                <span class="text">{brok.brokerName}</span>
+              </Link>
+            ))}
+          </div>
+          <p class="more-info">{templateFields.toughestBrokersText}</p>
+          <div class="best-broker-holder">
+            <div class="broker">
+              <div class="achievement">
+                <img src={achivImg} alt="" />
+              </div>
+              <div class="title">
+                <h5>Best Forex Broker</h5>
+                <p>TRADER AWARD</p>
+              </div>
+              <div class="image-rating">
+                <div class="image-holder">
+                  <img
+                    src={
+                      templateFields.stockBrokerAward.featuredImage.node
+                        .mediaItemUrl
+                    }
+                    alt=""
+                  />
+                </div>
+                <div class="rat-wrap">
+                  <span class="rating">
+                    <img alt="Rating" src={starImg} />
+                    <span
+                      class="rat-color"
+                      style={{
+                        width: `${
+                          avarageRatingCounter(
+                            templateFields.stockBrokerAward.cptBrokers
+                          ) * 20
+                        }%`,
+                      }}
+                    ></span>
+                  </span>
+                  {avarageRatingCounter(
+                    templateFields.stockBrokerAward.cptBrokers
+                  )}
+                </div>
+              </div>
+              <div class="more-info-button">
+                {Parser(templateFields.stockBrokerInfoBox)}
+                <div class="btn-wrapper">
+                  <a
+                    href={
+                      templateFields.stockBrokerAward.cptBrokers.affiliateLink
+                    }
+                  >
+                    Visit Broker
+                  </a>
+                </div>
+                <div class="btn-wrapper-white">
+                  <Link to={templateFields.stockBrokerAward.uri}>
+                    Broker Review
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div class="broker">
+              <div class="achievement">
+                <img src={achivImg} alt="" />
+              </div>
+              <div class="title">
+                <h5>Best Global Broker</h5>
+                <p>TRADER AWARD</p>
+              </div>
+              <div class="image-rating">
+                <div class="image-holder">
+                  <img
+                    src={
+                      templateFields.forexBrokerAward.featuredImage.node
+                        .mediaItemUrl
+                    }
+                    alt=""
+                  />
+                </div>
+                <div class="rat-wrap">
+                  <span class="rating">
+                    <img alt="Rating" src={starImg} />
+                    <span
+                      class="rat-color"
+                      style={{
+                        width: `${
+                          avarageRatingCounter(
+                            templateFields.forexBrokerAward.cptBrokers
+                          ) * 20
+                        }%`,
+                      }}
+                    ></span>
+                  </span>
+                  {avarageRatingCounter(
+                    templateFields.forexBrokerAward.cptBrokers
+                  )}
+                </div>
+              </div>
+              <div class="more-info-button">
+                {Parser(templateFields.forexBrokerInfoBox)}
+                <div class="btn-wrapper">
+                  <a
+                    href={
+                      templateFields.forexBrokerAward.cptBrokers.affiliateLink
+                    }
+                  >
+                    Visit Broker
+                  </a>
+                </div>
+                <div class="btn-wrapper-white">
+                  <Link to={templateFields.forexBrokerAward.uri}>
+                    Broker Review
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div class="broker">
+              <div class="achievement">
+                <img src={achivImg} alt="" />
+              </div>
+              <div class="title">
+                <h5>Best Mobile App</h5>
+                <p>TRADER AWARD</p>
+              </div>
+              <div class="image-rating">
+                <div class="image-holder">
+                  <img
+                    src={
+                      templateFields.etfBrokerAward.featuredImage.node
+                        .mediaItemUrl
+                    }
+                    alt=""
+                  />
+                </div>
+                <div class="rat-wrap">
+                  <span class="rating">
+                    <img alt="Rating" src={starImg} />
+                    <span
+                      class="rat-color"
+                      style={{
+                        width: `${
+                          avarageRatingCounter(
+                            templateFields.etfBrokerAward.cptBrokers
+                          ) * 20
+                        }%`,
+                      }}
+                    ></span>
+                  </span>
+                  {avarageRatingCounter(
+                    templateFields.etfBrokerAward.cptBrokers
+                  )}
+                </div>
+              </div>
+              <div class="more-info-button">
+                {Parser(templateFields.etfBrokerInfoBox)}
+                <div class="btn-wrapper">
+                  <a
+                    href={
+                      templateFields.etfBrokerAward.cptBrokers.affiliateLink
+                    }
+                  >
+                    Visit Broker
+                  </a>
+                </div>
+                <div class="btn-wrapper-white">
+                  <Link to={templateFields.etfBrokerAward.uri}>
+                    Broker Review
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="company-broker">
+            {Parser(templateFields.trustSubsectionText)}
+          </div>
+          <div class="company-holder">
+            {templateFields.companyHolder.map(company => (
+              <div class="item">
+                <img src={company.company.mediaItemUrl} alt="" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="info-main-page">
+        <div class="big-row">
+          <div class="image ">
+            <img src={templateFields.textIlustration.mediaItemUrl} alt="" />
+          </div>
+          <div class="text">
+            {Parser(
+              templateFields.bottomTextDropdown
+                ? templateFields.bottomTextDropdown
+                : ""
+            )}
+          </div>
+        </div>
+      </div>
+      <div class="reviews">
+        <div class="row">
+          <h3>{templateFields.headingSocProof}</h3>
+          <div class="reviews-holder">
+            {templateFields.listSocProof.map(proof => (
+              <div class="item">
+                {Parser(proof.text || "")}
+                <span class="author">- {proof.author}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <AppBanner />
+      <div class="information-block">
+        <div class="row">{Parser(templateFields.testimonialsText || "")}</div>
+      </div>
+      {/* <div className="new-hp-wrap">
         <div
           className="new_banner_bg"
           style={{ backgroundColor: templateFields.homeBannerColor }}
@@ -1267,7 +1523,7 @@ export default function NewHomePage({ data }) {
         <TrustSection />
         <TrustSectionText />
         <ListSocProof />
-      </div>
+      </div> */}
     </Layout>
   )
 }

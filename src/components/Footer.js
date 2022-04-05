@@ -4,7 +4,6 @@ import "jquery-match-height"
 import { Link, useStaticQuery, graphql } from "gatsby"
 import Parser from "html-react-parser"
 import Equalizer from "./Equalizer"
-import AppBanner from "./AppBanner"
 const shortid = require("shortid")
 
 export default function Footer(props) {
@@ -285,7 +284,6 @@ export default function Footer(props) {
 
   return (
     <>
-      <AppBanner />
       <TrustSection />
       <footer>
         <div class="link-holder">
