@@ -34,6 +34,12 @@ module.exports = {
       resolve: "gatsby-plugin-sass",
     },
     {
+      resolve: "gatsby-plugin-apollo",
+      options: {
+        uri: "https://yappie.io/pure-content/wcb/graphql",
+      },
+    },
+    {
       resolve: `gatsby-plugin-disqus`,
       options: {
         shortname: `www-wecomparebrokers-com`,

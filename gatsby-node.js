@@ -245,6 +245,15 @@ exports.createPages = async ({ actions, graphql }) => {
           },
         })
         break
+      case "BrokerFinderResult":
+        actions.createPage({
+          path: page.uri,
+          component: require.resolve("./src/templates/BrokerFinderResult.js"),
+          context: {
+            id: page.id,
+          },
+        })
+        break
       case "ComplaintsForm":
         actions.createPage({
           path: page.uri,

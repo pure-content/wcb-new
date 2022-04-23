@@ -97,7 +97,6 @@ export const query = graphql`
           con2ProsConsScore
           con3ProsCons
           con3ProsConsScore
-          countryBroker
           currencyPairsOffered
           customAuthorBroker {
             nicename
@@ -222,7 +221,6 @@ export const query = graphql`
               uri
             }
           }
-          primaryRegulator
           primaryRegulatorRegCompScore
           pro1ProsCons
           pro1ProsConsScore

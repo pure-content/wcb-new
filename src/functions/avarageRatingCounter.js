@@ -8,6 +8,7 @@ export const avarageRatingCounter = cptBrokers => {
     ratingEase,
     ratingMobTrad,
     ratingPlatfTools,
+    ratingMarkets,
   } = cptBrokers
   let arrayOfRatings = [
     ratingCommFees,
@@ -16,6 +17,7 @@ export const avarageRatingCounter = cptBrokers => {
     ratingEase,
     ratingMobTrad,
     ratingPlatfTools,
+    ratingMarkets,
   ]
 
   let divider = 0

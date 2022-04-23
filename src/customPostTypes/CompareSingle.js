@@ -58,7 +58,6 @@ export const query = graphql`
                 headquartersLocation
                 publiclyTradedEntityOrParent
                 regulated
-                primaryRegulator
                 minimumDeposit
                 fixedSpreads
                 tradingType
@@ -119,7 +118,6 @@ export const query = graphql`
                 headquartersLocation
                 publiclyTradedEntityOrParent
                 regulated
-                primaryRegulator
                 minimumDeposit
                 fixedSpreads
                 tradingType
@@ -417,11 +415,11 @@ export default function CompareSingle({ data }) {
           </div>
           <div class="medium-4 columns text-center tab-col">
             <span class="show-for-small-only">First broker: </span>
-            <p>{firstBrokerReview.cptBrokers.primaryRegulator}</p>
+            {/* <p>{firstBrokerReview.cptBrokers.primaryRegulator}</p> */}
           </div>
           <div class="medium-4 columns text-center tab-col">
             <span class="show-for-small-only">Second broker: </span>
-            <p>{secondBroker.cptBrokers.primaryRegulator}</p>
+            {/* <p>{secondBroker.cptBrokers.primaryRegulator}</p> */}
           </div>
         </div>
         <div class="row tab-row">

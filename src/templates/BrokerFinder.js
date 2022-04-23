@@ -14,6 +14,12 @@ import PageTopContent from "../components/PageTopContent"
 import Pagination from "../components/Pagination"
 import BrokerTableSingleItemNewView from "../components/BrokerTableSingleItemNewView"
 import CallBackFormPopUp from "../components/CallBackFormPopUp"
+import starImg from "../assets/images/star.svg"
+import starGreyImg from "../assets/images/star-grey.svg"
+import prosImg from "../assets/images/props.svg"
+import consImg from "../assets/images/cons.svg"
+import BreadCrumbs from "../components/BreadCrumbs"
+import { avarageRatingCounter } from "../functions/avarageRatingCounter"
 const shortid = require("shortid")
 
 export const query = graphql`
@@ -83,26 +89,31 @@ export const query = graphql`
           videoPage
         }
         tmplBrokerFinder {
-          rightColumnTitle
-          bodyTextChoosing
-          recommendedBrokerAdditionalText
-          recommendedBroker {
+          pageTitle
+          pageText
+          recommendedBrokers {
             ... on WPGraphQL_Broker123 {
               id
-              cptBrokers {
-                specialOffer
-                ourScore
-                likesList
-                affiliateLink
-                tabButtonAlternativeText
-                takeMeToBrokerButtonNoteText
-              }
+              title
+              uri
               featuredImage {
                 node {
                   mediaItemUrl
                 }
               }
-              title
+              cptBrokers {
+                affiliateLink
+                ratingCommFees
+                ratingCustResearch
+                ratingCustServ
+                ratingEase
+                ratingMobTrad
+                ratingPlatfTools
+                ratingMarkets
+                likesList
+                dislikesList
+                brokerWarningMessage
+              }
             }
           }
         }
@@ -122,13 +133,6 @@ export const query = graphql`
           opengraphType
         }
       }
-      acfOptionsGeneralSettings {
-        optGeneralSettings {
-          specialOfferIcon {
-            mediaItemUrl
-          }
-        }
-      }
     }
   }
 `
@@ -137,146 +141,9 @@ function BrokerFinderTemplate({ data, search }) {
   const page = data.wpgraphql.page
   const brokers = data.wpgraphql.brokers123.nodes
   const pageTemplate = data.wpgraphql.page.tmplBrokerFinder
-  const dt = new Date()
-
-  const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage] = useState(6)
-  const indexOfLastPost = currentPage * postsPerPage
-  const indexOfFirstPost = indexOfLastPost - postsPerPage
-  const [filteredBrokers, setFilteredBrokers] = useState(brokers)
-
-  const currentBrokers = filteredBrokers.slice(
-    indexOfFirstPost,
-    indexOfLastPost
-  )
-
-  useEffect(() => {
-    if (search) {
-      let country = $(`#main-form #country option[value="${search.country}"]`),
-        catVal = country.val(),
-        instrument = $(
-          `#main-form #instrument option[value="${search.instrument}"]`
-        ),
-        instVal = instrument.val()
-      $("#main-form #country").val(catVal).trigger("change")
-      $("#main-form #instrument").val(instVal).trigger("change")
-    }
-    $("#popup-sec-usr").select2({
-      placeholder: "Second Broker",
-      minimumResultsForSearch: Infinity,
-    })
-    $("#compare-form .close").click(function () {
-      $("#compare-form-wrap").fadeOut("fast")
-    })
-    $("#main-form #country").select2({
-      placeholder: "Preferred Trading Region",
-      allowClear: true,
-    })
-    $("#main-form #instrument").select2({
-      placeholder: "Broker Type",
-      minimumResultsForSearch: Infinity,
-      allowClear: true,
-    })
-    // $(".top-content-col").matchHeight()
-    $(".broker-col").matchHeight()
-
-    $(".compare-btn").on("click", function () {
-      var brokValue = $(this).attr("value")
-      $("#first-user").val(brokValue)
-      $("#compare-form-wrap").fadeIn("fast")
-    })
-    $("#compare-form .close").on("click", function () {
-      $("#compare-form-wrap").fadeOut("fast")
-    })
-
-    $(".compare-btn-add").on("click", function () {
-      var brokValue = $(this).attr("value")
-      $("#first-user-add").val(brokValue)
-    })
-  })
-
-  useEffect(() => {
-    if (search.country && search.instrument) {
-      const sortedBrokers = filteredBrokers.filter(eachBroker => {
-        if (
-          eachBroker.cptBrokers.brokerType &&
-          eachBroker.cptBrokers.brokerType.includes(search.instrument) &&
-          eachBroker.cptBrokers.brokerRegion &&
-          eachBroker.cptBrokers.brokerRegion.includes(search.country)
-        ) {
-          return eachBroker
-        }
-      })
-      setFilteredBrokers(sortedBrokers)
-    }
-    if (search.country && !search.instrument) {
-      const sortedBrokers = filteredBrokers.filter(eachBroker => {
-        if (
-          eachBroker.cptBrokers.brokerRegion &&
-          eachBroker.cptBrokers.brokerRegion.includes(search.country)
-        ) {
-          return eachBroker
-        }
-      })
-      setFilteredBrokers(sortedBrokers)
-    }
-    if (!search.country && search.instrument) {
-      const sortedBrokers = filteredBrokers.filter(eachBroker => {
-        if (
-          eachBroker.cptBrokers.brokerType &&
-          eachBroker.cptBrokers.brokerType.includes(search.instrument)
-        ) {
-          return eachBroker
-        }
-      })
-      setFilteredBrokers(sortedBrokers)
-    }
-  }, [search])
-
-  useEffect(() => {
-    $("html, body").animate(
-      {
-        scrollTop: $("#rec-brok-wrap").offset().top,
-      },
-      1000
-    )
-  }, [currentPage])
-
-  const Filter = () => {
-    return (
-      <div className="row">
-        <div className="small-12 columns">
-          <div className="filter-wrap">
-            <h3>
-              <img
-                src="https://meek-hint.flywheelsites.com/wp-content/themes/we-compare-brokers/images/filter-ico.svg"
-                alt="Filter"
-              />
-              Filters
-            </h3>
-            <form id="main-form" action={page.uri} method="get">
-              <select id="country" name="country">
-                <option></option>
-                {brokerRegions.map(region => {
-                  return <option value={region}>{region}</option>
-                })}
-              </select>
-              <select id="instrument" name="instrument">
-                <option></option>
-                {Object.keys(brokerTypes).map(key => {
-                  return <option value={key}>{brokerTypes[key]}</option>
-                })}
-              </select>
-
-              <button id="form-submit" className="btn blue" type="submit">
-                Find Me a Broker
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    )
-  }
+  const { recommendedBrokers } = pageTemplate
+  console.log(pageTemplate)
+  console.log(brokers)
 
   const pageInfo = {
     isFrontPage: page.isFrontPage,
@@ -328,7 +195,185 @@ function BrokerFinderTemplate({ data, search }) {
           })}
         </script>
       </Helmet>
-      <CompareFrom />
+      <div className="compare-main">
+        <div className="row">
+          <BreadCrumbs />
+          <h1>{pageTemplate.pageTitle || page.title}</h1>
+
+          {pageTemplate.pageText &&
+            Parser(pageTemplate.pageText ? pageTemplate.pageText : "")}
+
+          <div className="filter-wrap">
+            <h3>Quick Broker Finder</h3>
+            <form action="">
+              <div className="region">
+                <select name="" id="e1">
+                  <option value="USA">USA</option>
+                  <option value="EU">EU</option>
+                  <option value="APAC">APAC</option>
+                  <option value="ASIA">ASIA</option>
+                  <option value="AFRICA">AFRICA</option>
+                </select>
+              </div>
+              <div className="type">
+                <select name="" id="e2">
+                  <option value="">FOREX</option>
+                  <option value="">ETF</option>
+                  <option value="">Stocks</option>
+                </select>
+              </div>
+              <button id="form-submit" className="btn green" type="submit">
+                Find Me a Broker
+              </button>
+            </form>
+          </div>
+
+          <div className="broker-holder">
+            <h3>Recommended broker</h3>
+            <div className="broker-main-holder">
+              {recommendedBrokers.length > 0 &&
+                recommendedBrokers.map(brok => (
+                  <div className="broker">
+                    <div className="up-part">
+                      <div className="image-holder">
+                        <img
+                          src={brok.featuredImage?.node?.mediaItemUrl}
+                          alt={brok.title}
+                        />
+                      </div>
+                      <div className="rating">
+                        <span>{avarageRatingCounter(brok.cptBrokers)}</span>
+                        <div className="rat-wrap">
+                          <span className="rating">
+                            <img alt="Rating" src={starImg} />
+                            <span
+                              class="rat-color"
+                              style={{
+                                width: `${
+                                  avarageRatingCounter(brok.cptBrokers) * 20
+                                }%`,
+                              }}
+                            ></span>
+                          </span>
+                        </div>
+                      </div>
+                      <div className="more-rating">
+                        <div className="rating-item">
+                          <div className="title">Fees</div>
+                          <div className="rat-wrap">
+                            <span className="rating">
+                              <img alt="Rating" src={starGreyImg} />
+                              <span
+                                class="rat-color"
+                                style={{
+                                  width: `${
+                                    brok.cptBrokers.ratingCommFees * 20
+                                  }%`,
+                                }}
+                              ></span>
+                            </span>
+                          </div>
+                        </div>
+                        <div className="rating-item">
+                          <div className="title">Platforms</div>
+                          <div className="rat-wrap">
+                            <span className="rating">
+                              <img alt="Rating" src={starGreyImg} />
+                              <span
+                                class="rat-color"
+                                style={{
+                                  width: `${
+                                    brok.cptBrokers.ratingPlatfTools * 20
+                                  }%`,
+                                }}
+                              ></span>
+                            </span>
+                          </div>
+                        </div>
+                        <div className="rating-item">
+                          <div className="title">Markets & Products</div>
+                          <div className="rat-wrap">
+                            <span className="rating">
+                              <img alt="Rating" src={starGreyImg} />
+                              <span
+                                class="rat-color"
+                                style={{
+                                  width: `${
+                                    brok.cptBrokers.ratingMarkets * 20
+                                  }%`,
+                                }}
+                              ></span>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bottom-part">
+                      <div className="props-cons">
+                        <div className="props">
+                          <div className="title">
+                            <img src={prosImg} alt="" />
+                            Pros
+                          </div>
+                          {Parser(
+                            brok.cptBrokers.likesList
+                              ? brok.cptBrokers.likesList
+                              : ""
+                          )}
+                        </div>
+                        <div className="cons">
+                          <div className="title">
+                            <img src={consImg} alt="" />
+                            Cons
+                          </div>
+                          {Parser(
+                            brok.cptBrokers.dislikesList
+                              ? brok.cptBrokers.dislikesList
+                              : ""
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="butto-more-info">
+                        <a href={brok.affiliateLink} className="green">
+                          Open Demo Account
+                        </a>
+                        <Link to={brok.uri}>Read Review</Link>
+                        <p>{brok.cptBrokers.brokerWarningMessage}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+            </div>
+
+            <div className="see-more">See broker reviews</div>
+          </div>
+          <div className="company-holder">
+            <div className="item">
+              <img src="./src/assets/images/company-broker-1.png" alt="" />
+            </div>
+            <div className="item">
+              <img src="./src/assets/images/company-broker-2.png" alt="" />
+            </div>
+            <div className="item">
+              <img src="./src/assets/images/company-broker-3.png" alt="" />
+            </div>
+            <div className="item">
+              <img src="./src/assets/images/company-broker-4.png" alt="" />
+            </div>
+            <div className="item">
+              <img src="./src/assets/images/company-broker-5.png" alt="" />
+            </div>
+            <div className="item">
+              <img src="./src/assets/images/company-broker-6.png" alt="" />
+            </div>
+            <div className="item">
+              <img src="./src/assets/images/company-broker-7.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <CompareFrom />
       <CallBackFormPopUp />
       <PageTopContent page={page} template={pageTemplate} />
       <Filter />
@@ -369,7 +414,7 @@ function BrokerFinderTemplate({ data, search }) {
             )}
           </div>
         </div>
-      </div>
+      </div> */}
     </Layout>
   )
 }
